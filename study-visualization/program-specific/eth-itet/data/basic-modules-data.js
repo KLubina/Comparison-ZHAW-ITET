@@ -34,10 +34,6 @@ window.StudiengangModules = [
         name: "Grundlagen der Elektrotechnik und Digitaltechnik",
         semester: "2. Sem HS",
       },
-      {
-        name: "Kommunikationstechnik",
-        semester: "2. Sem FS",
-      },
     ],
     // KONTEXT
     year: 1,
@@ -372,12 +368,6 @@ window.StudiengangModules = [
     secondcategory: "prufungsblock-2",
     thirdcategory: "elektrotechnik",
     fourthcategory: "praktisch",
-    zhawModules: [
-      {
-        name: "Kommunikationstechnik",
-        semester: "2. Sem FS",
-      },
-    ],
     // KONTEXT
     year: 2,
     semester: 2,
