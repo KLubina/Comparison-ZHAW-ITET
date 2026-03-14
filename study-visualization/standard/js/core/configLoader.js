@@ -184,6 +184,7 @@ window.StudienplanConfigLoader = {
   setTitles(studiengang) {
     const titleElement = document.getElementById("studienplan-title");
     const subtitleElement = document.getElementById("studienplan-subtitle");
+    const nonPendantBox = document.getElementById("non-pendant-box");
 
     if (titleElement) {
       const title =
@@ -198,6 +199,44 @@ window.StudienplanConfigLoader = {
           window.StudiengangGeneralConfig.subtitleHtml;
       } else {
         subtitleElement.textContent = "mind. 180 KP insgesamt";
+      }
+    }
+
+    if (nonPendantBox) {
+      if (window.StudiengangGeneralConfig?.nonPendantHtml) {
+        const title =
+          window.StudiengangGeneralConfig?.nonPendantTitle ||
+          "ZHAW-Module ohne ETH-Pendant";
+        const contentHtml = window.StudiengangGeneralConfig.nonPendantHtml;
+
+        nonPendantBox.innerHTML = `
+          <button type="button" class="non-pendant-toggle" aria-expanded="false">
+            <span>${title}</span>
+            <span class="non-pendant-toggle-icon">+</span>
+          </button>
+          <div class="non-pendant-content" style="display: none;">
+            ${contentHtml}
+          </div>
+        `;
+        nonPendantBox.style.display = "block";
+
+        const toggleBtn = nonPendantBox.querySelector(".non-pendant-toggle");
+        const toggleIcon = nonPendantBox.querySelector(
+          ".non-pendant-toggle-icon",
+        );
+        const content = nonPendantBox.querySelector(".non-pendant-content");
+
+        if (toggleBtn && toggleIcon && content) {
+          toggleBtn.addEventListener("click", () => {
+            const isOpen = toggleBtn.getAttribute("aria-expanded") === "true";
+            toggleBtn.setAttribute("aria-expanded", isOpen ? "false" : "true");
+            content.style.display = isOpen ? "none" : "block";
+            toggleIcon.textContent = isOpen ? "+" : "-";
+          });
+        }
+      } else {
+        nonPendantBox.innerHTML = "";
+        nonPendantBox.style.display = "none";
       }
     }
   },
